@@ -18,4 +18,6 @@ export interface DataItem {
   country: string;
 }
 
+export interface ColumnItem { key: string | number; values: [DataItem] }
+
 export const COLUMN_WIDTH = Utils.deviceWidth - 10;
