@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import Utils from "../../util";
 
 export interface KanbanOptions {
@@ -18,6 +19,17 @@ export interface DataItem {
   country: string;
 }
 
-export interface ColumnItem { key: string | number; values: [DataItem] }
+export interface ColumnItem {
+  key: string | number;
+  values: [DataItem];
+}
 
-export const COLUMN_WIDTH = Utils.deviceWidth - 10;
+/**
+ * TODO
+ * Set platform-specific column widths here
+ */
+const COLUMN_WIDTH_MOBILE = Utils.deviceWidth - 10;
+const COLUMN_WIDTH_WEB = 300;
+
+export const COLUMN_WIDTH =
+  Platform.OS !== "web" ? COLUMN_WIDTH_MOBILE : COLUMN_WIDTH_WEB;
