@@ -17,7 +17,12 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Kanban: {
             screens: {
-              KanbanScreen: "one",
+              KanbanScreen: "kanban",
+            },
+          },
+          Animations: {
+            screens: {
+              AnimationScreen: "animations",
             },
           },
           TabTwo: {

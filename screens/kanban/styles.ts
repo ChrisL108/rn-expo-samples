@@ -37,8 +37,10 @@ const styles = StyleSheet.create({
     // flex: 1,
     padding: 20,
     margin: 10,
-    // borderColor: "blue",
-    // borderWidth: 1,
+    width: 200,
+    height: 100,
+    borderColor: "blue",
+    borderWidth: 1,
   },
 });
 

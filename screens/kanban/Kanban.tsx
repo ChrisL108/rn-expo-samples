@@ -34,22 +34,22 @@ export default function Kanban() {
   }, []);
 
   async function getData() {
-    const response = await fetch(
-      "https://api.mockaroo.com/api/ebaf4f30?count=100&key=58a2c730"
-    );
-    const json = await response.json();
-    const groupedData: any = [];
-    const key = "country";
-    for (let row of json) {
-      const idx = groupedData.findIndex((v: any) => v && v.key == row[key]);
-      if (idx == -1) {
-        groupedData.push({ key: row[key], values: [row] });
-      } else {
-        groupedData[idx].values.push(row);
-      }
-    }
-    console.log("groupedData: ", groupedData);
-    setData(groupedData);
+    // const response = await fetch(
+    //   "https://api.mockaroo.com/api/ebaf4f30?count=100&key=58a2c730"
+    // );
+    // const json = await response.json();
+    // const groupedData: any = [];
+    // const key = "country";
+    // for (let row of json) {
+    //   const idx = groupedData.findIndex((v: any) => v && v.key == row[key]);
+    //   if (idx == -1) {
+    //     groupedData.push({ key: row[key], values: [row] });
+    //   } else {
+    //     groupedData[idx].values.push(row);
+    //   }
+    // }
+    // console.log("groupedData: ", groupedData);
+    // setData(groupedData);
   }
 
   const RenderItem = ({ item }: { item: DataItem }) => {

@@ -17,6 +17,7 @@ import { ColorSchemeName, Pressable } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import Kanban from "../screens/kanban/Kanban";
+import Animations from "../screens/animations/Animations";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
@@ -112,6 +113,14 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "Tab Two",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Animations"
+        component={Animations}
+        options={{
+          title: "Animations",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
