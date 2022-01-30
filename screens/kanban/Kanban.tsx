@@ -1,8 +1,16 @@
 import * as React from "react";
 import { FlatList, ScrollView, Text, View } from "react-native";
+import {
+  GestureEvent,
+  PanGestureHandler,
+  // PanGestureHandlerEventPayload,
+  // PanGestureHandlerGestureEvent,
+} from "react-native-gesture-handler";
 import Animated, {
   FadeInDown,
+  useAnimatedGestureHandler,
   useAnimatedRef,
+  useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 import { DataItem, ColumnItem } from "./config";
@@ -11,9 +19,15 @@ import styles from "./styles";
 export default function Kanban() {
   const [data, setData] = React.useState<Array<ColumnItem>>([]);
 
-  const scrollViewRef = useAnimatedRef();
+  const scrollViewRef = React.useRef();
+
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
+  const absoluteX = useSharedValue(0);
+  const absoluteY = useSharedValue(0);
+
+  const movingMode = useSharedValue(false);
+  const hoverItem = useSharedValue<DataItem | null>(null);
 
   React.useEffect(() => {
     getData();
@@ -40,25 +54,85 @@ export default function Kanban() {
 
   const RenderItem = ({ item }: { item: DataItem }) => {
     return (
-      <Animated.View style={styles.rowItem} entering={FadeInDown}>
+      <View style={styles.rowItem}>
         <Text>{item.id}</Text>
         <Text>{item.title}</Text>
         <Text>{item.genre}</Text>
         <Text>{item.country}</Text>
-      </Animated.View>
+      </View>
     );
   };
 
+  // function RenderAnimatedItem({ item }: { item: DataItem }) {
+  //   const animatedRowStyles = useAnimatedStyle(() => {
+  //     return {
+  //       // ...(movingMode.value ? { position: "absolute", top: 0, left: 0 } : {}),
+  //       transform: [
+  //         { translateX: translateX.value },
+  //         { translateY: translateY.value },
+  //       ],
+  //     };
+  //   });
+
+  //   const values = hoverItem.value?.id == item.id ? hoverItem.value : item;
+
+  //   // if (movingMode.value && hoverItem.value)
+  //   // if (hoverItem.value)
+  //   return (
+  //     <Animated.View style={[styles.rowItem, animatedRowStyles]}>
+  //       <Text>{values.id}</Text>
+  //       <Text>{values.title}</Text>
+  //       <Text>{values.genre}</Text>
+  //       <Text>{values.country}</Text>
+  //     </Animated.View>
+  //   );
+  // }
+
+  // const _handleGesture = useAnimatedGestureHandler<
+  //   PanGestureHandlerGestureEvent,
+  //   { startX: number; startY: number }
+  // >({
+  //   onStart: (_, ctx) => {
+  //     console.log("start(), event: ", _);
+  //     movingMode.value = true;
+  //     ctx.startX = translateX.value;
+  //     ctx.startY = translateY.value;
+  //   },
+  //   onActive: (event, ctx) => {
+  //     console.log("active(), event: ", event);
+  //     translateX.value = ctx.startX + event.translationX;
+  //     translateY.value = ctx.startY + event.translationY;
+  //   },
+  //   onEnd: (_, __) => {
+  //     console.log("end()");
+
+  //     movingMode.value = false;
+  //     translateX.value = 0;
+  //     translateY.value = 0;
+  //     absoluteX.value = 0;
+  //     absoluteY.value = 0;
+  //   },
+  // });
+
   return (
     <View style={styles.container}>
-      <ScrollView horizontal contentContainerStyle={styles.kanbanScrollView}>
+      {/* <PanGestureHandler
+        onGestureEvent={_handleGesture}
+        onHandlerStateChange={() => {}}
+      > */}
+      {/* <RenderAnimatedItem /> */}
+      <ScrollView
+        horizontal
+        contentContainerStyle={styles.kanbanScrollView}
+        // ref={scrollViewRef}
+      >
         {data.length > 0 &&
           data.map((v) => (
             <FlatList
               data={v.values}
               renderItem={RenderItem}
-              keyExtractor={({ id }) => `${id}`}
-              stickyHeaderIndices={[0, -1]}
+              keyExtractor={({ id, country }) => `${country}-${id}`}
+              stickyHeaderIndices={[0]}
               ListHeaderComponent={() => (
                 <Text style={styles.title}>
                   {v.key} ({v.values.length})
@@ -69,6 +143,7 @@ export default function Kanban() {
             />
           ))}
       </ScrollView>
+      {/* </PanGestureHandler> */}
     </View>
   );
 }
