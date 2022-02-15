@@ -20,7 +20,7 @@ import Kanban from "../screens/kanban/Kanban";
 import Animations from "../screens/animations/Animations";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import TabTwoScreen from "../screens/TabTwo_Skeleton";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -80,7 +80,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Kanban"
+      initialRouteName="SkeletonView" //"Kanban"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
@@ -109,10 +109,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="SkeletonView"
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
+          title: "Skeleton View",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

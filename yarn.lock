@@ -6000,6 +6000,11 @@ react-native-gesture-handler@~2.1.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+react-native-kanban@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-kanban/-/react-native-kanban-0.0.0.tgz#b25e70eb9848e097ee40f106713da9c1300f9d11"
+  integrity sha512-03EfoZwW4aK6t8vu6onGXIA8d38tR8q3/2dr+iMDOwTSgM88WNIsI9orAdRuxh2Gs+aoEauVh6FMfqqg+BCU/Q==
+
 react-native-reanimated@~2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.3.1.tgz#c7abad48f9e6c84610b0d5e270088ecd61750382"

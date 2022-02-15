@@ -25,7 +25,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               AnimationScreen: "animations",
             },
           },
-          TabTwo: {
+          SkeletonView: {
             screens: {
               TabTwoScreen: "two",
             },
